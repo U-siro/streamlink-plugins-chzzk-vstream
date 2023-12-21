@@ -32,10 +32,13 @@ class chzzk(Plugin):
         if res_data["content"] == None:
             return
         res_data_playback = json.loads(res_data["content"]["livePlaybackJson"])
-
+        self.author = res_data["content"]["channel"]["channelName"]
+        self.id = res_data["content"]["liveId"]
+        self.title = res_data["content"]["liveTitle"]
+        self.category = res_data["content"]["liveCategoryValue"]
         # Create an HLSStream object with the stream URL
         hls_stream = HLSStream.parse_variant_playlist(self.session, res_data_playback["media"][0]["path"])
- 
+    
         # Add the HLS stream to the streams dictionary
         streams = hls_stream
  
